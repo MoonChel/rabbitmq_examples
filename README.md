@@ -17,6 +17,7 @@
     dotenv -f .env run -- python basic/prepare.py
     dotenv -f .env run -- python basic/consume.py
     dotenv -f .env run -- python basic/publish.py
+    dotenv -f .env run -- python basic/publish_http.py
 ```
 
 ### Remote procedure call
