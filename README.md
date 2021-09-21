@@ -22,10 +22,19 @@
 
 ### Remote procedure call
 
+- https://www.rabbitmq.com/direct-reply-to.html
+
+```shell
+    dotenv -f .env run -- python remote_procedure_call/rpc_consume.py
+    dotenv -f .env run -- python remote_procedure_call/rpc_publish_consume.py
+```
+
+![Task planning](https://github.com/MoonChel/rabbitmq_examples/blob/37f7692d256a75788e62d66d3136fa73bf1bfba2/images/remote_procedure_call.png)
+
 
 ### Plan and execute tasks in future
 
-![Image of Yaktocat](https://github.com/MoonChel/rabbitmq_examples/blob/adf68311e03ad7f74a6823ca1bc761dc89f719b7/images/task_planning_for_future.png)
+![Task planning](https://github.com/MoonChel/rabbitmq_examples/blob/adf68311e03ad7f74a6823ca1bc761dc89f719b7/images/task_planning_for_future.png)
 
 ## Notes
 
