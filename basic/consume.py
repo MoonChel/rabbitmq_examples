@@ -24,6 +24,8 @@ def consumer_start():
     except KeyboardInterrupt:
         channel.stop_consuming()
 
+    # close connection
+    channel.close()
     connection.close()
 
 

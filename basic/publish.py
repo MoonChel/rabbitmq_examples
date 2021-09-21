@@ -19,6 +19,7 @@ def publish():
     )
 
     # close connection
+    channel.close()
     connection.close()
 
 
