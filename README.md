@@ -29,12 +29,24 @@
     dotenv -f .env run -- python remote_procedure_call/rpc_publish_consume.py
 ```
 
-![Task planning](https://github.com/MoonChel/rabbitmq_examples/blob/37f7692d256a75788e62d66d3136fa73bf1bfba2/images/remote_procedure_call.png)
+![Remote procedure call](https://github.com/MoonChel/rabbitmq_examples/blob/37f7692d256a75788e62d66d3136fa73bf1bfba2/images/remote_procedure_call.png)
 
 
 ### Plan and execute tasks in future
 
 ![Task planning](https://github.com/MoonChel/rabbitmq_examples/blob/adf68311e03ad7f74a6823ca1bc761dc89f719b7/images/task_planning_for_future.png)
+
+### Dead letter exchange
+
+- https://www.rabbitmq.com/dlx.html
+
+![Dead letter exchange](https://github.com/MoonChel/rabbitmq_examples/blob/dd5fb43b02a662bcfea8462146bc5d91703ed7e3/images/dead_letter_queue.png)
+
+```shell
+    dotenv -f .env run -- python dead_letter_exchange/prepare.py
+    dotenv -f .env run -- python dead_letter_exchange/publish_http.py
+    dotenv -f .env run -- python dead_letter_exchange/failed_consume.py
+```
 
 ## Notes
 

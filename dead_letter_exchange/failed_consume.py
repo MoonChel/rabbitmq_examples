@@ -1,21 +1,16 @@
 import os
 import pika
-from pika.adapters.blocking_connection import BlockingChannel
 
 QUEUE = os.environ["QUEUE"]
 PRIVATE_URL = os.environ["PRIVATE_URL"]
 
 
-def on_message(channel: BlockingChannel, method_frame, properties, body):
-    number = int(body)
+def on_message(channel, method_frame, header_frame, body):
+    print("reject", body)
 
-    # will be different with any new message
-    print(properties.reply_to)
-
-    channel.basic_publish(
-        "",
-        routing_key=properties.reply_to,
-        body=str(number ** 2),
+    channel.basic_reject(
+        delivery_tag=method_frame.delivery_tag,
+        requeue=False,
     )
 
 
@@ -29,7 +24,6 @@ def consumer_start():
     channel.basic_consume(
         QUEUE,
         on_message,
-        auto_ack=True,
         consumer_tag="our-consumer",
     )
 

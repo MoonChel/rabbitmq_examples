@@ -6,7 +6,6 @@ PRIVATE_URL = os.environ["PRIVATE_URL"]
 
 
 def on_message(channel, method_frame, header_frame, body):
-    print(channel)
     print(body)
 
 
