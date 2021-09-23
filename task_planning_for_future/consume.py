@@ -23,6 +23,7 @@ class ActionNotFound(Exception):
 
 def on_message(channel, method_frame, header_frame, body):
     # or apply pydantic rightaway
+    """{"action": "send_feedback_email_to_customer", "kwargs": {...}}"""
     json_body = json.loads(body)
 
     if not json_body["action"] in ROUTER:
@@ -30,7 +31,7 @@ def on_message(channel, method_frame, header_frame, body):
 
     try:
         # store results if needed
-        results = ROUTER[json_body](json_body["kwargs"])
+        results = ROUTER[json_body["action"]](json_body["kwargs"])
     except:
         # catch exception with context to rollbar
         rollbar.report_exc_info(extra_data=json_body)

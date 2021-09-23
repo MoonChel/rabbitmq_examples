@@ -8,6 +8,9 @@ PRIVATE_URL = os.environ["PRIVATE_URL"]
 def on_message(channel, method_frame, header_frame, body):
     print("reject", body)
 
+    # try:
+    # business_logic()
+    # except Exception:
     channel.basic_reject(
         delivery_tag=method_frame.delivery_tag,
         requeue=False,

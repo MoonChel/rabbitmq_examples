@@ -22,7 +22,7 @@ TaskTypes = Enum(
 
 class TaskPlan(AuditMixin, Base):
     task_plan_id = Column(Integer, primary_key=True)
-    task_type = Column(TaskTypes, default="send_invoice")
+    task_type = Column(TaskTypes, default="send_feedback_email_to_customer")
     execution_date = Column(DateTime)
     kwargs = Column(JSON)
     active = Column(Boolean, default=True)

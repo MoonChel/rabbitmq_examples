@@ -6,7 +6,9 @@ PRIVATE_URL = os.environ["PRIVATE_URL"]
 
 
 def on_message(channel, method_frame, header_frame, body):
+    # raise Exception("consumer failed")
     print(body)
+    # channel.basic_ack()
 
 
 def consumer_start():
@@ -16,7 +18,12 @@ def consumer_start():
     )
     channel = connection.channel()
 
-    channel.basic_consume(QUEUE, on_message, auto_ack=True, consumer_tag="our-consumer")
+    channel.basic_consume(
+        QUEUE,
+        on_message,
+        # auto_ack=True,
+        consumer_tag="our-consumer",
+    )
 
     try:
         channel.start_consuming()

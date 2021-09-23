@@ -1,11 +1,12 @@
 import os
 import pika
-from pika.exchange_type import ExchangeType
 
 QUEUE = os.environ["QUEUE"]
 ROUTING_KEY = os.environ["ROUTING_KEY"]
 PRIVATE_URL = os.environ["PRIVATE_URL"]
 EXCHANGE_NAME = os.environ["EXCHANGE_NAME"]
+DLX_EXCHANGE_NAME = "dlx_exchange"
+DLX_QUEUE_NAME = "dlq_queue"
 
 
 def prepare_rabbitmq():
@@ -21,31 +22,8 @@ def prepare_rabbitmq():
     # cleanup
     channel.exchange_delete(EXCHANGE_NAME)
     channel.queue_delete(QUEUE)
-
-    # setup
-    channel.exchange_declare(
-        EXCHANGE_NAME,
-        exchange_type=ExchangeType.direct,
-        # Survive a reboot of RabbitMQ
-        durable=True,
-        # create if does not exists
-        # passive=True,
-    )
-
-    channel.queue_declare(
-        QUEUE,
-        # Survive a reboot of RabbitMQ
-        durable=True,
-        # create if does not exists
-        # passive=True,
-    )
-
-    # bind queue to exchange by ROUTING_KEY
-    channel.queue_bind(
-        QUEUE,
-        EXCHANGE_NAME,
-        routing_key=ROUTING_KEY,
-    )
+    channel.exchange_delete(DLX_EXCHANGE_NAME)
+    channel.queue_delete(DLX_QUEUE_NAME)
 
     # close connection
     channel.close()
@@ -54,4 +32,4 @@ def prepare_rabbitmq():
 
 if __name__ == "__main__":
     prepare_rabbitmq()
-    print("Done")
+    print("Cleared")
